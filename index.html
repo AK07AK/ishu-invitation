@@ -8,37 +8,51 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cinzel Decorative, Cormorant Garamond, Plus Jakarta Sans -->
+  <!-- Single Unified Font Family: Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       1. ROYAL PEACOCK EMERALD & CHAMPAGNE GOLD DESIGN TOKENS (LOCKED)
+       1. ROYAL PEACOCK EMERALD & CHAMPAGNE GOLD DESIGN TOKENS + UNIFORM TYPOGRAPHY
        ========================================================================== */
     :root {
-      --bg-primary: #06231e;
-      --bg-secondary: #0a352e;
-      --bg-tertiary: #0d423a;
-      --bg-card: rgba(10, 53, 46, 0.88);
-      --bg-card-inner: rgba(6, 35, 30, 0.82);
-      --bg-door-left: linear-gradient(135deg, #0d423a 0%, #0a352e 55%, #041915 100%);
-      --bg-door-right: linear-gradient(225deg, #0d423a 0%, #0a352e 55%, #041915 100%);
+      --bg-primary: #041f1a;
+      --bg-secondary: #072d26;
+      --bg-tertiary: #0b3c33;
+      --bg-card: rgba(7, 45, 38, 0.9);
+      --bg-card-inner: rgba(4, 31, 26, 0.88);
+      --bg-door-left: linear-gradient(135deg, #0b3c33 0%, #072d26 55%, #041f1a 100%);
+      --bg-door-right: linear-gradient(225deg, #0b3c33 0%, #072d26 55%, #041f1a 100%);
       --text-primary: #fef9ec;
-      --text-secondary: #f5e1a4;
+      --text-secondary: #f7e5a9;
       --text-muted: #d4af37;
-      --gold-light: #f5e1a4;
+      --gold-light: #f7e5a9;
       --gold-mid: #d4af37;
-      --gold-deep: #c59b27;
+      --gold-deep: #b8860b;
       --gold-border: rgba(212, 175, 55, 0.45);
       --gold-glow: rgba(212, 175, 55, 0.25);
       --accent-badge: rgba(212, 175, 55, 0.15);
-      --shadow-color: rgba(2, 14, 11, 0.82);
+      --shadow-color: rgba(2, 14, 11, 0.85);
+
+      /* Constant Font Family & Constant Font Sizes Across Entire App */
+      --font-unified: 'Playfair Display', Georgia, serif;
+      --fs-base: 1rem;
+      --fs-heading: 1.5rem;
+      --fs-hero-title: clamp(2.1rem, 6vw, 3.6rem);
     }
 
-    * {
+    @media (min-width: 640px) {
+      :root {
+        --fs-base: 1.125rem;
+        --fs-heading: 1.85rem;
+      }
+    }
+
+    *, *::before, *::after, body, button, input, a, span, p, div, h1, h2, h3, h4 {
       box-sizing: border-box;
+      font-family: var(--font-unified) !important;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -47,19 +61,36 @@
       padding: 0;
       background-color: var(--bg-primary);
       color: var(--text-primary);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-unified) !important;
+      font-size: var(--fs-base);
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* Typography Utility Classes */
-    .font-royal {
-      font-family: 'Cinzel Decorative', serif;
+    /* Unified Typography Scale Classes (Constant Font Size System) */
+    .text-unified-base,
+    p, span, a, button, div {
+      font-size: var(--fs-base);
     }
-    .font-serif-luxury {
-      font-family: 'Cormorant Garamond', serif;
+
+    .text-unified-heading,
+    h2, h3 {
+      font-size: var(--fs-heading) !important;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
     }
+
+    .text-hero-invitation,
+    h1.text-hero-invitation {
+      font-size: var(--fs-hero-title) !important;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+    }
+
+    .font-royal,
+    .font-serif-luxury,
     .font-sans-clean {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-unified) !important;
     }
 
     /* Metallic Gold Foil Text Gradient */
@@ -291,10 +322,321 @@
       background-size: 24px 18px;
       background-repeat: repeat-x;
     }
+
+    /* ==========================================================================
+       4. 3D SPLIT-FLAP CARD FLIPPER COUNTDOWN (SINGLE LINE ON ALL SCREENS)
+       ========================================================================== */
+    .countdown-single-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(4px, 1.8vw, 18px);
+      width: 100%;
+    }
+
+    .flip-unit-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 1 auto;
+    }
+
+    .flip-digits-pair {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: clamp(2px, 0.8vw, 6px);
+    }
+
+    .flip-unit-separator {
+      color: var(--gold-mid);
+      font-weight: 700;
+      font-size: var(--fs-heading) !important;
+      line-height: 1;
+      margin-bottom: clamp(18px, 3vw, 24px);
+      opacity: 0.85;
+      user-select: none;
+    }
+
+    .flip-card {
+      position: relative;
+      width: clamp(28px, 7.6vw, 56px);
+      height: clamp(42px, 11vw, 78px);
+      border-radius: clamp(6px, 1.2vw, 10px);
+      background: #041915;
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.65), inset 0 0 12px rgba(212, 175, 55, 0.15);
+      perspective: 450px;
+      user-select: none;
+    }
+
+    .flip-card .top-half,
+    .flip-card .bottom-half,
+    .flip-card .flap-front,
+    .flip-card .flap-back {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50%;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-card .top-half span,
+    .flip-card .bottom-half span,
+    .flip-card .flap-front span,
+    .flip-card .flap-back span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 200%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-unified) !important;
+      font-size: clamp(1.1rem, 3.8vw, 1.85rem) !important;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      line-height: 1;
+    }
+
+    .flip-card .top-half,
+    .flip-card .flap-front {
+      top: 0;
+      background: linear-gradient(180deg, #0f463d 0%, #072822 100%);
+      border-top-left-radius: clamp(5px, 1vw, 9px);
+      border-top-right-radius: clamp(5px, 1vw, 9px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.65);
+    }
+
+    .flip-card .top-half span,
+    .flip-card .flap-front span {
+      top: 0;
+    }
+
+    .flip-card .bottom-half,
+    .flip-card .flap-back {
+      bottom: 0;
+      background: linear-gradient(180deg, #041f1a 0%, #0b3c33 100%);
+      border-bottom-left-radius: clamp(5px, 1vw, 9px);
+      border-bottom-right-radius: clamp(5px, 1vw, 9px);
+      border-top: 1px solid rgba(247, 229, 169, 0.22);
+    }
+
+    .flip-card .bottom-half span,
+    .flip-card .flap-back span {
+      bottom: 0;
+    }
+
+    .flip-card .flap-front {
+      transform-origin: 50% 100%;
+      transform: rotateX(0deg);
+      z-index: 3;
+      display: none;
+    }
+
+    .flip-card .flap-back {
+      transform-origin: 50% 0%;
+      transform: rotateX(90deg);
+      z-index: 4;
+      display: none;
+    }
+
+    .flip-card.is-flipping .flap-front {
+      display: block;
+      animation: flipTopDown 0.26s ease-in forwards;
+    }
+
+    .flip-card.is-flipping .flap-back {
+      display: block;
+      animation: flipBottomDown 0.26s 0.26s ease-out forwards;
+    }
+
+    @keyframes flipTopDown {
+      0% { transform: rotateX(0deg); filter: brightness(1); }
+      100% { transform: rotateX(-90deg); filter: brightness(0.55); }
+    }
+
+    @keyframes flipBottomDown {
+      0% { transform: rotateX(90deg); filter: brightness(1.25); }
+      100% { transform: rotateX(0deg); filter: brightness(1); }
+    }
+
+    /* Side Notches & Hinge Line on Flip Card */
+    .flip-card::before,
+    .flip-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 3px;
+      height: 6px;
+      margin-top: -3px;
+      background: #02100d;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      z-index: 6;
+    }
+    .flip-card::before {
+      left: -1px;
+      border-left: none;
+      border-radius: 0 3px 3px 0;
+    }
+    .flip-card::after {
+      right: -1px;
+      border-right: none;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .flip-unit-label {
+      margin-top: 6px;
+      color: var(--text-secondary);
+      font-size: var(--fs-base) !important;
+      letter-spacing: 0.04em;
+      text-align: center;
+      white-space: nowrap;
+    }
   </style>
 </head>
 
 <body class="brocade-bg min-h-screen selection:bg-amber-300 selection:text-emerald-950">
+
+  <!-- ==========================================================================
+       SHARED ROYAL TWIN PEACOCKS & SACRED LOTUS MANDALA SVG DEFINITIONS
+       ========================================================================== -->
+  <svg width="0" height="0" class="hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="royalGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fff4cc"/>
+        <stop offset="35%" stop-color="#f5e1a4"/>
+        <stop offset="70%" stop-color="#d4af37"/>
+        <stop offset="100%" stop-color="#9e7618"/>
+      </linearGradient>
+      <linearGradient id="peacockPlumeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#1cc5a8"/>
+        <stop offset="50%" stop-color="#0d6e5e"/>
+        <stop offset="100%" stop-color="#052b24"/>
+      </linearGradient>
+      <radialGradient id="lotusGlowGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(245, 225, 164, 0.45)"/>
+        <stop offset="65%" stop-color="rgba(212, 175, 55, 0.14)"/>
+        <stop offset="100%" stop-color="rgba(6, 35, 30, 0)"/>
+      </radialGradient>
+
+      <!-- Reusable Masterpiece Symbol: Twin Royal Peacocks & Sacred Kalash Lotus Crest -->
+      <symbol id="royalTwinPeacockCrest" viewBox="0 0 320 240">
+        <!-- Ambient Halo Glow -->
+        <circle cx="160" cy="118" r="105" fill="url(#lotusGlowGrad)"/>
+
+        <!-- Outer Sacred Geometry Temple Arch & Filigree Ring -->
+        <circle cx="160" cy="118" r="94" stroke="url(#royalGoldGrad)" stroke-width="1.4" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+        <circle cx="160" cy="118" r="84" stroke="url(#royalGoldGrad)" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <!-- Hanging Temple Bells (Ghanti) Left & Right -->
+        <g stroke="url(#royalGoldGrad)" stroke-width="1.5" fill="rgba(212,175,55,0.22)">
+          <line x1="56" y1="18" x2="56" y2="58"/>
+          <circle cx="56" cy="36" r="2.8" fill="#f5e1a4"/>
+          <path d="M46 72 C46 58 50 54 56 54 C62 54 66 58 66 72 L70 78 H42 Z"/>
+          <circle cx="56" cy="81" r="3" fill="#f5e1a4"/>
+
+          <line x1="264" y1="18" x2="264" y2="58"/>
+          <circle cx="264" cy="36" r="2.8" fill="#f5e1a4"/>
+          <path d="M254 72 C254 58 258 54 264 54 C270 54 274 58 274 72 L278 78 H250 Z"/>
+          <circle cx="264" cy="81" r="3" fill="#f5e1a4"/>
+        </g>
+
+        <!-- Center Radiant Sunburst & Temple Gopuram Kalash Finial -->
+        <g transform="translate(160, 48)">
+          <path d="M0 -30 L5 -14 L18 -22 L10 -8 L26 -6 L12 2 L0 10 L-12 2 L-26 -6 L-10 -8 L-18 -22 L-5 -14 Z" fill="url(#royalGoldGrad)" opacity="0.85"/>
+          <circle cx="0" cy="-6" r="9" fill="#072b24" stroke="url(#royalGoldGrad)" stroke-width="2"/>
+          <circle cx="0" cy="-6" r="4" fill="#f5e1a4"/>
+        </g>
+
+        <!-- Central Sacred Kalash & Mangala Coconut with Mango Leaves -->
+        <g transform="translate(160, 118)">
+          <!-- Mango Leaves -->
+          <path d="M-24 -16 C-16 -30 -4 -26 0 -14 C4 -26 16 -30 24 -16 C14 -10 8 -8 0 -10 C-8 -8 -14 -10 -24 -16 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.4"/>
+          <!-- Sacred Coconut -->
+          <path d="M0 -34 C-11 -22 -12 -10 0 -6 C12 -10 11 -22 0 -34 Z" fill="url(#royalGoldGrad)"/>
+          <!-- Ornate Brass Kalash Pot -->
+          <path d="M-16 -10 H16 L12 -3 C23 4 25 22 14 34 C8 40 -8 40 -14 34 C-25 22 -23 4 -12 -3 Z" fill="url(#royalGoldGrad)" stroke="#fff4cc" stroke-width="1.2"/>
+          <path d="M-19 10 Q0 18 19 10" stroke="#06231e" stroke-width="1.6" fill="none"/>
+          <path d="M-17 20 Q0 28 17 20" stroke="#06231e" stroke-width="1.4" fill="none"/>
+          <circle cx="0" cy="14" r="3.2" fill="#06231e"/>
+        </g>
+
+        <!-- LEFT ROYAL DANCING PEACOCK -->
+        <g transform="translate(160, 134)">
+          <!-- Layered Tail Plumage Feathers -->
+          <path d="M-22 10 C-58 -28 -96 -20 -112 8 C-92 22 -64 26 -24 22 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <path d="M-20 4 C-48 -46 -88 -48 -106 -18 C-84 -2 -54 8 -22 12 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <path d="M-16 -2 C-34 -58 -68 -68 -88 -44 C-68 -24 -44 -8 -18 4 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <!-- Golden Feather Eyes (Ocelli) -->
+          <circle cx="-90" cy="6" r="6" fill="url(#royalGoldGrad)"/>
+          <circle cx="-90" cy="6" r="3" fill="#06231e"/>
+          <circle cx="-84" cy="-22" r="6.5" fill="url(#royalGoldGrad)"/>
+          <circle cx="-84" cy="-22" r="3.2" fill="#06231e"/>
+          <circle cx="-68" cy="-42" r="6" fill="url(#royalGoldGrad)"/>
+          <circle cx="-68" cy="-42" r="2.8" fill="#06231e"/>
+          <!-- Graceful Peacock Neck, Body & Crown -->
+          <path d="M-18 18 C-38 20 -52 6 -48 -14 C-45 -28 -32 -36 -30 -48 C-29 -55 -35 -60 -42 -58 C-34 -66 -22 -62 -20 -50 C-18 -38 -28 -26 -24 -12 C-20 2 -8 6 -12 18 Z" fill="url(#royalGoldGrad)"/>
+          <!-- Peacock Wing Detail -->
+          <path d="M-40 -2 C-32 -8 -22 -2 -20 10 C-30 14 -40 10 -40 -2 Z" fill="url(#peacockPlumeGrad)" stroke="#fff4cc" stroke-width="1"/>
+          <!-- Peacock Eye & Crown Plumes -->
+          <circle cx="-30" cy="-54" r="1.8" fill="#06231e"/>
+          <path d="M-30 -60 L-36 -71 M-27 -60 L-29 -73 M-24 -58 L-22 -70" stroke="url(#royalGoldGrad)" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="-36" cy="-72" r="1.8" fill="#f5e1a4"/>
+          <circle cx="-29" cy="-74" r="1.8" fill="#f5e1a4"/>
+          <circle cx="-22" cy="-71" r="1.8" fill="#f5e1a4"/>
+        </g>
+
+        <!-- RIGHT ROYAL DANCING PEACOCK (Mirrored) -->
+        <g transform="translate(160, 134) scale(-1, 1)">
+          <!-- Layered Tail Plumage Feathers -->
+          <path d="M-22 10 C-58 -28 -96 -20 -112 8 C-92 22 -64 26 -24 22 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <path d="M-20 4 C-48 -46 -88 -48 -106 -18 C-84 -2 -54 8 -22 12 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <path d="M-16 -2 C-34 -58 -68 -68 -88 -44 C-68 -24 -44 -8 -18 4 Z" fill="url(#peacockPlumeGrad)" stroke="url(#royalGoldGrad)" stroke-width="1.5"/>
+          <!-- Golden Feather Eyes (Ocelli) -->
+          <circle cx="-90" cy="6" r="6" fill="url(#royalGoldGrad)"/>
+          <circle cx="-90" cy="6" r="3" fill="#06231e"/>
+          <circle cx="-84" cy="-22" r="6.5" fill="url(#royalGoldGrad)"/>
+          <circle cx="-84" cy="-22" r="3.2" fill="#06231e"/>
+          <circle cx="-68" cy="-42" r="6" fill="url(#royalGoldGrad)"/>
+          <circle cx="-68" cy="-42" r="2.8" fill="#06231e"/>
+          <!-- Graceful Peacock Neck, Body & Crown -->
+          <path d="M-18 18 C-38 20 -52 6 -48 -14 C-45 -28 -32 -36 -30 -48 C-29 -55 -35 -60 -42 -58 C-34 -66 -22 -62 -20 -50 C-18 -38 -28 -26 -24 -12 C-20 2 -8 6 -12 18 Z" fill="url(#royalGoldGrad)"/>
+          <!-- Peacock Wing Detail -->
+          <path d="M-40 -2 C-32 -8 -22 -2 -20 10 C-30 14 -40 10 -40 -2 Z" fill="url(#peacockPlumeGrad)" stroke="#fff4cc" stroke-width="1"/>
+          <!-- Peacock Eye & Crown Plumes -->
+          <circle cx="-30" cy="-54" r="1.8" fill="#06231e"/>
+          <path d="M-30 -60 L-36 -71 M-27 -60 L-29 -73 M-24 -58 L-22 -70" stroke="url(#royalGoldGrad)" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="-36" cy="-72" r="1.8" fill="#f5e1a4"/>
+          <circle cx="-29" cy="-74" r="1.8" fill="#f5e1a4"/>
+          <circle cx="-22" cy="-71" r="1.8" fill="#f5e1a4"/>
+        </g>
+
+        <!-- Sacred Thousand-Petal Blooming Lotus Pedestal Base -->
+        <g transform="translate(160, 168)">
+          <!-- Back Lotus Petals -->
+          <path d="M-74 6 C-56 -16 -34 -14 -20 6 Z" fill="rgba(212,175,55,0.28)" stroke="url(#royalGoldGrad)" stroke-width="1.4"/>
+          <path d="M74 6 C56 -16 34 -14 20 6 Z" fill="rgba(212,175,55,0.28)" stroke="url(#royalGoldGrad)" stroke-width="1.4"/>
+          <!-- Middle Lotus Petals -->
+          <path d="M-52 10 C-40 -18 -18 -18 -6 10 Z" fill="url(#royalGoldGrad)" opacity="0.88"/>
+          <path d="M52 10 C40 -18 18 -18 6 10 Z" fill="url(#royalGoldGrad)" opacity="0.88"/>
+          <!-- Center Prime Lotus Petal -->
+          <path d="M0 -22 C-16 -6 -16 12 0 18 C16 12 16 -6 0 -22 Z" fill="url(#royalGoldGrad)" stroke="#fff4cc" stroke-width="1.2"/>
+          <!-- Lower Inverted Lotus Base & Pearl Garland -->
+          <path d="M-86 12 Q0 28 86 12" stroke="url(#royalGoldGrad)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M-64 22 Q0 36 64 22" stroke="url(#royalGoldGrad)" stroke-width="1.4" stroke-dasharray="3 5" fill="none"/>
+          <circle cx="0" cy="32" r="4" fill="#f5e1a4"/>
+          <circle cx="-28" cy="29" r="2.8" fill="#d4af37"/>
+          <circle cx="28" cy="29" r="2.8" fill="#d4af37"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
 
   <!-- ==========================================================================
        AMBIENT PARTICLE CANVAS (Floating Gold Dust & Peacock Shimmer)
@@ -415,29 +757,21 @@
           <circle cx="130" cy="130" r="88" stroke="url(#sealGold)" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
         </svg>
 
-        <!-- Inner Seal Content (Ornate Peacock Emblem + Grand Wedding Invitation Title, No I & R) -->
-        <div class="relative z-10 flex flex-col items-center justify-center px-5 py-6 rounded-full w-56 h-56 sm:w-64 sm:h-64 bg-gradient-to-b from-[#0d423a] via-[#0a352e] to-[#041915] border-2 border-amber-300/75 shadow-2xl">
-          <!-- Ornate Golden Peacock Feather & Lotus Crest -->
-          <svg viewBox="0 0 64 52" class="w-11 h-9 mb-1" fill="none">
-            <path d="M32 6 C23 16 22 28 32 38 C42 28 41 16 32 6 Z" stroke="#f5e1a4" stroke-width="1.6" fill="rgba(212,175,55,0.2)"/>
-            <circle cx="32" cy="22" r="5" fill="#0d423a" stroke="#d4af37" stroke-width="1.5"/>
-            <circle cx="32" cy="22" r="2.2" fill="#f5e1a4"/>
-            <path d="M16 34 C20 26 26 28 32 38 C38 28 44 26 48 34" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M22 42 H42" stroke="#f5e1a4" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Inner Seal Content (Intricate Twin Royal Peacocks & Lotus Mandala + Unified Typography) -->
+        <div class="relative z-10 flex flex-col items-center justify-center px-5 py-5 rounded-full w-60 h-60 sm:w-68 sm:h-68 bg-gradient-to-b from-[#0d423a] via-[#0a352e] to-[#041915] border-2 border-amber-300/80 shadow-2xl">
+          <!-- Intricate Royal Twin Dancing Peacocks & Sacred Lotus Artwork -->
+          <svg viewBox="0 0 320 240" class="w-32 h-24 sm:w-36 sm:h-28 -mt-2 mb-1 drop-shadow-md">
+            <use href="#royalTwinPeacockCrest" />
           </svg>
 
-          <h2 class="font-royal text-base sm:text-lg gold-foil-text font-bold uppercase tracking-[0.14em] leading-snug mb-1.5">
+          <h2 class="text-unified-heading gold-foil-text font-bold uppercase tracking-wider text-center leading-tight mb-1">
             Wedding Invitation
           </h2>
 
-          <p class="font-serif-luxury text-amber-100 text-base sm:text-lg font-semibold tracking-wide leading-tight">
-            C Ishwarya
+          <p class="text-unified-base text-amber-100 font-semibold tracking-wide leading-tight">
+            C Ishwarya &amp; R L Rajkumar
           </p>
-          <span class="text-amber-300/85 font-serif-luxury italic text-xs my-0.5">weds</span>
-          <p class="font-serif-luxury text-amber-100 text-base sm:text-lg font-semibold tracking-wide leading-tight">
-            R L Rajkumar
-          </p>
-          <div class="mt-2 pt-1.5 border-t border-amber-400/30 text-[11px] tracking-[0.22em] text-amber-200/90 uppercase">
+          <div class="mt-1.5 pt-1 border-t border-amber-400/35 text-unified-base tracking-wider text-amber-200/90">
             Nov 22, 2026
           </div>
         </div>
@@ -447,7 +781,7 @@
       <button
         id="openInvitationBtn"
         type="button"
-        class="mt-6 btn-royal-gold pulse-gold-btn px-8 py-4 rounded-full text-sm sm:text-base tracking-[0.18em] uppercase inline-flex items-center gap-3 cursor-pointer"
+        class="mt-6 btn-royal-gold pulse-gold-btn px-8 py-4 rounded-full text-unified-base tracking-wider uppercase inline-flex items-center gap-3 cursor-pointer"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
@@ -458,37 +792,57 @@
   </div>
 
   <!-- ==========================================================================
-       2. FLOATING CONTROLS (Photo Frame Toggle & Replay Gate Only)
+       2. FLOATING CONTROLS (Photo Toggle, Replay Gate & Soothing Music Toggle)
        ========================================================================== -->
-  <div class="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto z-40 flex items-center justify-between sm:justify-start gap-2 pointer-events-none">
-    <!-- Photo Frame Visibility Toggle -->
-    <div class="pointer-events-auto flex items-center gap-1.5 bg-[#041915]/85 backdrop-blur-md border border-amber-300/40 rounded-full px-3 py-1.5 shadow-2xl text-xs text-amber-100">
-      <button
-        type="button"
-        id="togglePhotosBtn"
-        onclick="togglePhotoFrames()"
-        class="px-2.5 py-1 rounded-full bg-amber-400/15 hover:bg-amber-400/30 border border-amber-300/30 text-[11px] tracking-wide transition flex items-center gap-1.5 cursor-pointer"
-        title="Show or hide couple photo frames"
-      >
-        <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-        </svg>
-        <span id="togglePhotosLabel">Photos: On</span>
-      </button>
-    </div>
-
-    <!-- Replay Curtain Button -->
+  <div class="fixed bottom-4 left-4 right-4 z-40 flex items-center justify-between gap-2 pointer-events-none">
+    <!-- Left Controls: Photo Frame Visibility Toggle & Replay Gate -->
     <div class="pointer-events-auto flex items-center gap-2">
+      <div class="flex items-center bg-[#041915]/90 backdrop-blur-md border border-amber-300/45 rounded-full px-3 py-1.5 shadow-2xl text-amber-100">
+        <button
+          type="button"
+          id="togglePhotosBtn"
+          onclick="togglePhotoFrames()"
+          class="px-3 py-1 rounded-full bg-amber-400/15 hover:bg-amber-400/30 border border-amber-300/30 text-unified-base tracking-wide transition flex items-center gap-2 cursor-pointer"
+          title="Show or hide couple photo frames"
+        >
+          <svg class="w-4 h-4 text-amber-300 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span id="togglePhotosLabel">Photos: On</span>
+        </button>
+      </div>
+
       <button
         type="button"
         onclick="replayDoors()"
-        class="bg-[#041915]/85 backdrop-blur-md border border-amber-300/40 hover:border-amber-300 text-amber-200 rounded-full p-2.5 shadow-2xl transition cursor-pointer"
+        class="bg-[#041915]/90 backdrop-blur-md border border-amber-300/45 hover:border-amber-300 text-amber-200 rounded-full p-3 shadow-2xl transition cursor-pointer"
         title="Replay Opening Doors Animation"
         aria-label="Replay Opening Animation"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
         </svg>
+      </button>
+    </div>
+
+    <!-- Right Control: Soothing Background Music Mute / Unmute Button -->
+    <div class="pointer-events-auto">
+      <button
+        type="button"
+        id="musicToggleBtn"
+        onclick="toggleSoothingMusic()"
+        class="bg-[#041915]/90 backdrop-blur-md border border-amber-300/50 hover:border-amber-300 text-amber-200 rounded-full px-4 py-2 shadow-2xl transition flex items-center gap-2 cursor-pointer"
+        title="Toggle Soothing Background Music"
+        aria-label="Toggle Soothing Background Music"
+      >
+        <svg id="musicIconPlaying" class="w-5 h-5 text-amber-300 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+        </svg>
+        <svg id="musicIconMuted" class="w-5 h-5 text-amber-300/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+        </svg>
+        <span id="musicStatusText" class="text-unified-base">Music: Off</span>
       </button>
     </div>
   </div>
@@ -527,28 +881,30 @@
         <circle cx="18" cy="18" r="4" fill="currentColor" class="text-amber-300"/>
       </svg>
 
-      <!-- Auspicious Peacock & Kalash Header Crest + Grand "Wedding Invitation" Display Heading -->
+      <!-- Intricate Royal Twin Peacocks & Sacred Lotus Centerpiece + Main Title -->
       <div class="flex flex-col items-center justify-center mb-10">
-        <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full border border-amber-300/45 bg-amber-400/10 mb-5 shadow-inner float-gentle">
-          <!-- Royal Peacock Feather & Kalash SVG -->
-          <svg viewBox="0 0 64 64" class="w-11 h-11 sm:w-12 sm:h-12" fill="none">
-            <path d="M32 7 C22 18 22 32 32 42 C42 32 42 18 32 7 Z" fill="rgba(212,175,55,0.22)" stroke="#d4af37" stroke-width="2"/>
-            <circle cx="32" cy="24" r="6" fill="#06231e" stroke="#f5e1a4" stroke-width="1.6"/>
-            <circle cx="32" cy="24" r="2.5" fill="#d4af37"/>
-            <path d="M16 38 C21 29 27 31 32 42 C37 31 43 29 48 38" stroke="#f5e1a4" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M20 46 H44 L41 55 H23 Z" fill="rgba(212,175,55,0.28)" stroke="#d4af37" stroke-width="1.8"/>
+        <div class="relative w-64 h-48 sm:w-80 sm:h-56 flex items-center justify-center mb-3 float-gentle">
+          <!-- Subtle Rotating Celestial Mandala Ring Behind the Twin Peacocks -->
+          <svg viewBox="0 0 240 240" class="absolute w-48 h-48 sm:w-56 sm:h-56 spin-mandala opacity-35 pointer-events-none">
+            <circle cx="120" cy="120" r="112" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="5 5" fill="none"/>
+            <polygon points="120,10 145,85 220,85 160,130 182,205 120,160 58,205 80,130 20,85 95,85" stroke="#f5e1a4" stroke-width="1" fill="none"/>
+          </svg>
+
+          <!-- Masterpiece Royal Twin Dancing Peacocks & Lotus Mandala SVG -->
+          <svg viewBox="0 0 320 240" class="relative z-10 w-full h-full drop-shadow-2xl">
+            <use href="#royalTwinPeacockCrest" />
           </svg>
         </div>
 
-        <!-- Enlarged, Grand Frontpage "Wedding Invitation" Title -->
-        <h1 class="font-royal text-3xl sm:text-5xl md:text-6xl font-bold gold-foil-text uppercase tracking-[0.14em] leading-tight px-2 drop-shadow-lg">
+        <!-- Frontpage "Wedding Invitation" Title (Large Majestic Font Size) -->
+        <h1 class="text-hero-invitation font-bold gold-foil-text uppercase tracking-widest px-2 drop-shadow-lg">
           Wedding Invitation
         </h1>
 
         <!-- Decorative Peacock Gold Divider -->
         <div class="flex items-center justify-center gap-4 my-4 w-full max-w-md">
           <div class="h-[1.5px] flex-1 bg-gradient-to-r from-transparent to-amber-400/80"></div>
-          <span class="text-amber-300 text-lg">❖</span>
+          <span class="text-amber-300 text-unified-base">❖</span>
           <div class="h-[1.5px] flex-1 bg-gradient-to-l from-transparent to-amber-400/80"></div>
         </div>
       </div>
@@ -583,17 +939,17 @@
                   <circle cx="87" cy="54" r="3.5" fill="#d4af37"/>
                   <path d="M26 125 C26 92 40 80 60 80 C80 80 94 92 94 125" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
                 </svg>
-                <span class="font-royal text-lg gold-foil-text font-bold">C Ishwarya</span>
-                <span class="mt-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/30 text-amber-200 group-hover:bg-amber-400/30 transition">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <span class="text-unified-base gold-foil-text font-bold">C Ishwarya</span>
+                <span class="mt-2 inline-flex items-center gap-1 text-unified-base px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/30 text-amber-200 group-hover:bg-amber-400/30 transition">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                   </svg>
-                  Add Bride Photo
+                  Add Photo
                 </span>
               </div>
               <div class="
                 absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity
-                flex items-center justify-center text-xs uppercase tracking-widest text-amber-200 font-semibold
+                flex items-center justify-center text-unified-base text-amber-200 font-semibold
               ">
                 Change Photo
               </div>
@@ -608,16 +964,16 @@
           </div>
 
           <!-- Bride Details -->
-          <span class="text-xs uppercase tracking-[0.28em] font-semibold px-3.5 py-1 rounded-full border border-amber-400/30 mb-3" style="background: var(--accent-badge); color: var(--text-secondary);">
+          <span class="text-unified-base font-semibold px-4 py-1 rounded-full border border-amber-400/30 mb-3" style="background: var(--accent-badge); color: var(--text-secondary);">
             The Bride
           </span>
-          <h2 class="font-royal text-3xl sm:text-4xl md:text-5xl font-bold gold-foil-text tracking-wide leading-tight">
+          <h2 class="text-unified-heading font-bold gold-foil-text tracking-wide">
             C Ishwarya
           </h2>
-          <p class="font-serif-luxury text-lg sm:text-xl font-semibold mt-2 tracking-wide" style="color: var(--text-secondary);">
+          <p class="text-unified-base font-semibold mt-2 tracking-wide" style="color: var(--text-secondary);">
             BBA, PGDM
           </p>
-          <p class="font-sans-clean text-sm sm:text-base mt-1 font-medium px-4 py-1.5 rounded-full border border-amber-400/20" style="background: var(--bg-card-inner); color: var(--text-primary);">
+          <p class="text-unified-base mt-1 font-medium px-4 py-1.5 rounded-full border border-amber-400/20" style="background: var(--bg-card-inner); color: var(--text-primary);">
             Senior Analyst at BNP Paribas
           </p>
         </div>
@@ -629,7 +985,7 @@
               <circle cx="60" cy="60" r="54" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
               <polygon points="60,8 73,42 109,42 80,63 91,98 60,77 29,98 40,63 11,42 47,42" stroke="#d4af37" stroke-width="1" fill="rgba(212,175,55,0.08)"/>
             </svg>
-            <span class="font-serif-luxury italic text-3xl sm:text-4xl gold-foil-text font-bold z-10">
+            <span class="italic text-unified-heading gold-foil-text font-bold z-10">
               &amp;
             </span>
           </div>
@@ -658,17 +1014,17 @@
                   <path d="M24 125 C24 90 38 78 60 78 C82 78 96 90 96 125" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
                   <path d="M42 82 L60 112 L78 82" stroke="#d4af37" stroke-width="1.8" fill="none"/>
                 </svg>
-                <span class="font-royal text-base gold-foil-text font-bold">R L Rajkumar</span>
-                <span class="mt-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/30 text-amber-200 group-hover:bg-amber-400/30 transition">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <span class="text-unified-base gold-foil-text font-bold">R L Rajkumar</span>
+                <span class="mt-2 inline-flex items-center gap-1 text-unified-base px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/30 text-amber-200 group-hover:bg-amber-400/30 transition">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                   </svg>
-                  Add Groom Photo
+                  Add Photo
                 </span>
               </div>
               <div class="
                 absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity
-                flex items-center justify-center text-xs uppercase tracking-widest text-amber-200 font-semibold
+                flex items-center justify-center text-unified-base text-amber-200 font-semibold
               ">
                 Change Photo
               </div>
@@ -682,18 +1038,18 @@
             />
           </div>
 
-          <!-- Groom Details (Renamed to R L Rajkumar) -->
-          <span class="text-xs uppercase tracking-[0.28em] font-semibold px-3.5 py-1 rounded-full border border-amber-400/30 mb-3" style="background: var(--accent-badge); color: var(--text-secondary);">
+          <!-- Groom Details -->
+          <span class="text-unified-base font-semibold px-4 py-1 rounded-full border border-amber-400/30 mb-3" style="background: var(--accent-badge); color: var(--text-secondary);">
             The Groom
           </span>
-          <h2 class="font-royal text-3xl sm:text-4xl md:text-5xl font-bold gold-foil-text tracking-wide leading-tight">
+          <h2 class="text-unified-heading font-bold gold-foil-text tracking-wide">
             R L Rajkumar
           </h2>
-          <p class="font-serif-luxury text-lg sm:text-xl font-semibold mt-2 tracking-wide" style="color: var(--text-secondary);">
+          <p class="text-unified-base font-semibold mt-2 tracking-wide" style="color: var(--text-secondary);">
             B.Com., LL.B. (Hons.)
           </p>
-          <p class="font-sans-clean text-sm sm:text-base mt-1 font-medium px-4 py-1.5 rounded-full border border-amber-400/20" style="background: var(--bg-card-inner); color: var(--text-primary);">
-            Advocate at Madras High Court
+          <p class="text-unified-base mt-1 font-medium px-4 py-1.5 rounded-full border border-amber-400/20" style="background: var(--bg-card-inner); color: var(--text-primary);">
+            Advocate - Madras High Court
           </p>
         </div>
       </div>
@@ -718,10 +1074,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </div>
-            <p class="font-serif-luxury text-lg sm:text-xl font-semibold" style="color: var(--text-secondary);">
+            <p class="text-unified-base font-semibold" style="color: var(--text-secondary);">
               Couple Portrait Frame
             </p>
-            <p class="text-xs mt-1 max-w-md opacity-80">
+            <p class="text-unified-base mt-1 max-w-md opacity-80">
               Click to place your couple photograph here, or use the "Photos: On/Off" switch at the bottom-left for a pure typographic invitation.
             </p>
           </div>
@@ -735,85 +1091,153 @@
         />
       </div>
 
-      <!-- Primary Marriage Date Highlight Banner (Updated to 6:00 AM - 7:30 AM) -->
+      <!-- Primary Marriage Date Highlight Banner (6:00 AM to 7:30 AM) -->
       <div class="mt-10 inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 px-6 sm:px-10 py-5 rounded-3xl border border-amber-300/50 shadow-xl" style="background: var(--bg-card-inner);">
         <div class="text-center sm:text-right">
-          <span class="block text-xs uppercase tracking-[0.25em] opacity-80">Marriage Date</span>
-          <span class="font-royal text-xl sm:text-2xl font-bold gold-foil-text">Sunday, Nov 22, 2026</span>
+          <span class="block text-unified-base opacity-80">Marriage Date</span>
+          <span class="text-unified-heading font-bold gold-foil-text">Sunday, Nov 22, 2026</span>
         </div>
         <div class="hidden sm:block h-10 w-[1px] bg-amber-300/40"></div>
         <div class="text-center sm:text-left">
-          <span class="block text-xs uppercase tracking-[0.25em] opacity-80">Muhurtham Time</span>
-          <span class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-secondary);">
-            Morning, between 6:00 AM to 7:30 AM
+          <span class="block text-unified-base opacity-80">Muhurtham Time</span>
+          <span class="text-unified-heading font-semibold" style="color: var(--text-secondary);">
+            between 6:00 AM to 7:30 AM
           </span>
         </div>
       </div>
     </section>
 
     <!-- ========================================================================
-         LIVE MUHURTHAM COUNTDOWN SECTION (Target: Nov 22, 2026 • 6:00 AM)
+         LIVE 3D CARD FLIPPER COUNTDOWN SECTION (Single Row on Mobile & Desktop)
          ======================================================================== -->
-    <section id="countdown" class="reveal-item luxury-card rounded-[32px] p-6 sm:p-10 text-center mb-14">
-      <span class="text-xs uppercase tracking-[0.32em] font-semibold" style="color: var(--text-muted);">
+    <section id="countdown" class="reveal-item luxury-card rounded-[32px] px-3 py-7 sm:p-10 text-center mb-14">
+      <span class="text-unified-base font-semibold" style="color: var(--text-muted);">
         Counting Down To The Auspicious Moment
       </span>
-      <h2 class="font-royal text-2xl sm:text-3xl font-bold gold-foil-text mt-2">
+      <h2 class="text-unified-heading font-bold gold-foil-text mt-2">
         Sunday, November 22, 2026 • 6:00 AM
       </h2>
 
-      <!-- 4 Ornate Timer Boxes -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto mt-8">
-        <div class="rounded-2xl p-4 sm:p-6 border border-amber-300/40 relative overflow-hidden" style="background: var(--bg-card-inner);">
-          <span id="cd-days" class="font-royal text-3xl sm:text-5xl font-bold gold-foil-text block">00</span>
-          <span class="text-xs uppercase tracking-[0.25em] mt-2 block opacity-80">Days</span>
+      <!-- Single-Line 3D Split-Flap Card Flipper (Days : Hours : Minutes : Seconds) -->
+      <div class="countdown-single-row mt-8 mx-auto max-w-4xl" aria-label="Countdown to Wedding Muhurtham">
+
+        <!-- DAYS GROUP -->
+        <div class="flip-unit-group">
+          <div class="flip-digits-pair">
+            <div class="flip-card" id="d1" data-key="d1" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+            <div class="flip-card" id="d2" data-key="d2" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+          </div>
+          <span class="flip-unit-label">Days</span>
         </div>
-        <div class="rounded-2xl p-4 sm:p-6 border border-amber-300/40 relative overflow-hidden" style="background: var(--bg-card-inner);">
-          <span id="cd-hours" class="font-royal text-3xl sm:text-5xl font-bold gold-foil-text block">00</span>
-          <span class="text-xs uppercase tracking-[0.25em] mt-2 block opacity-80">Hours</span>
+
+        <span class="flip-unit-separator" aria-hidden="true">:</span>
+
+        <!-- HOURS GROUP -->
+        <div class="flip-unit-group">
+          <div class="flip-digits-pair">
+            <div class="flip-card" id="h1" data-key="h1" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+            <div class="flip-card" id="h2" data-key="h2" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+          </div>
+          <span class="flip-unit-label">Hours</span>
         </div>
-        <div class="rounded-2xl p-4 sm:p-6 border border-amber-300/40 relative overflow-hidden" style="background: var(--bg-card-inner);">
-          <span id="cd-minutes" class="font-royal text-3xl sm:text-5xl font-bold gold-foil-text block">00</span>
-          <span class="text-xs uppercase tracking-[0.25em] mt-2 block opacity-80">Minutes</span>
+
+        <span class="flip-unit-separator" aria-hidden="true">:</span>
+
+        <!-- MINUTES GROUP -->
+        <div class="flip-unit-group">
+          <div class="flip-digits-pair">
+            <div class="flip-card" id="m1" data-key="m1" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+            <div class="flip-card" id="m2" data-key="m2" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+          </div>
+          <span class="flip-unit-label">Minutes</span>
         </div>
-        <div class="rounded-2xl p-4 sm:p-6 border border-amber-300/40 relative overflow-hidden" style="background: var(--bg-card-inner);">
-          <span id="cd-seconds" class="font-royal text-3xl sm:text-5xl font-bold gold-foil-text block">00</span>
-          <span class="text-xs uppercase tracking-[0.25em] mt-2 block opacity-80">Seconds</span>
+
+        <span class="flip-unit-separator" aria-hidden="true">:</span>
+
+        <!-- SECONDS FLIPPER GROUP -->
+        <div class="flip-unit-group">
+          <div class="flip-digits-pair">
+            <div class="flip-card" id="s1" data-key="s1" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+            <div class="flip-card" id="s2" data-key="s2" data-digit="0">
+              <div class="top-half"><span>0</span></div>
+              <div class="bottom-half"><span>0</span></div>
+              <div class="flap-front"><span>0</span></div>
+              <div class="flap-back"><span>0</span></div>
+            </div>
+          </div>
+          <span class="flip-unit-label">Seconds</span>
         </div>
+
       </div>
-      <p id="countdownStatusMsg" class="text-xs tracking-widest uppercase mt-5 opacity-75">
+
+      <p id="countdownStatusMsg" class="text-unified-base mt-6 opacity-80">
         Indian Standard Time (IST)
       </p>
     </section>
 
     <!-- ========================================================================
-         CELEBRATION EVENTS SCHEDULE (No Address & No Calendar Buttons inside Cards)
+         CELEBRATION EVENTS SCHEDULE (No Event 1/2/3 Labels, No Address, No Calendar)
          ======================================================================== -->
     <section id="events" class="mb-14">
       <div class="reveal-item text-center mb-10">
-        <span class="text-xs uppercase tracking-[0.35em] font-semibold" style="color: var(--text-muted);">
+        <span class="text-unified-base font-semibold" style="color: var(--text-muted);">
           Wedding Itinerary
         </span>
-        <h2 class="font-royal text-3xl sm:text-4xl font-bold gold-foil-text mt-2">
+        <h2 class="text-unified-heading font-bold gold-foil-text mt-2">
           Auspicious Celebrations
         </h2>
         <div class="flex items-center justify-center gap-3 mt-3 max-w-xs mx-auto">
           <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-amber-400/70"></div>
-          <span class="text-amber-300">❖</span>
+          <span class="text-amber-300 text-unified-base">❖</span>
           <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-amber-400/70"></div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
 
-        <!-- 1. ENGAGEMENT CARD -->
+        <!-- ENGAGEMENT CARD (Clean: No Event 01 Label) -->
         <article class="reveal-item luxury-card rounded-[28px] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1 rounded-full text-xs uppercase tracking-[0.2em] font-semibold border border-amber-300/40" style="background: var(--accent-badge);">
-                Event 01
-              </span>
-              <div class="w-11 h-11 rounded-full border border-amber-300/40 flex items-center justify-center bg-amber-400/10 text-amber-300">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-unified-heading font-bold gold-foil-text">
+                Engagement
+              </h3>
+              <div class="w-12 h-12 rounded-full border border-amber-300/40 flex items-center justify-center bg-amber-400/10 text-amber-300 shrink-0">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <circle cx="9.5" cy="14" r="5.5"/>
                   <circle cx="14.5" cy="14" r="5.5"/>
@@ -822,11 +1246,7 @@
               </div>
             </div>
 
-            <h3 class="font-royal text-2xl sm:text-3xl font-bold gold-foil-text mb-2">
-              Engagement
-            </h3>
-
-            <div class="mt-5 space-y-4 pt-5 border-t border-amber-400/20">
+            <div class="mt-4 space-y-4 pt-5 border-t border-amber-400/20">
               <div class="flex items-start gap-3.5">
                 <svg class="w-5 h-5 text-amber-300 shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -835,10 +1255,10 @@
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-primary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-primary);">
                     21st November 2026
                   </p>
-                  <p class="text-xs uppercase tracking-wider opacity-80">Saturday Evening</p>
+                  <p class="text-unified-base opacity-80">Saturday Evening</p>
                 </div>
               </div>
 
@@ -848,7 +1268,7 @@
                   <path d="M12 7v5l3 3"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-secondary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-secondary);">
                     6:00 PM
                   </p>
                 </div>
@@ -857,14 +1277,14 @@
           </div>
         </article>
 
-        <!-- 2. RECEPTION CARD -->
+        <!-- RECEPTION CARD (Clean: No Event 02 Label) -->
         <article class="reveal-item luxury-card rounded-[28px] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1 rounded-full text-xs uppercase tracking-[0.2em] font-semibold border border-amber-300/40" style="background: var(--accent-badge);">
-                Event 02
-              </span>
-              <div class="w-11 h-11 rounded-full border border-amber-300/40 flex items-center justify-center bg-amber-400/10 text-amber-300">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-unified-heading font-bold gold-foil-text">
+                Reception
+              </h3>
+              <div class="w-12 h-12 rounded-full border border-amber-300/40 flex items-center justify-center bg-amber-400/10 text-amber-300 shrink-0">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M12 2C9.5 6 9.5 9 12 12c2.5-3 2.5-6 0-10z"/>
                   <path d="M5 14h14l-2 5H7l-2-5z"/>
@@ -873,11 +1293,7 @@
               </div>
             </div>
 
-            <h3 class="font-royal text-2xl sm:text-3xl font-bold gold-foil-text mb-2">
-              Reception
-            </h3>
-
-            <div class="mt-5 space-y-4 pt-5 border-t border-amber-400/20">
+            <div class="mt-4 space-y-4 pt-5 border-t border-amber-400/20">
               <div class="flex items-start gap-3.5">
                 <svg class="w-5 h-5 text-amber-300 shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -886,10 +1302,10 @@
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-primary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-primary);">
                     21st November 2026
                   </p>
-                  <p class="text-xs uppercase tracking-wider opacity-80">Saturday Evening</p>
+                  <p class="text-unified-base opacity-80">Saturday Evening</p>
                 </div>
               </div>
 
@@ -899,7 +1315,7 @@
                   <path d="M12 7v5l3 3"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-secondary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-secondary);">
                     7:00 PM Onwards
                   </p>
                 </div>
@@ -908,25 +1324,21 @@
           </div>
         </article>
 
-        <!-- 3. MARRIAGE (MUHURTHAM) CARD - Highlighted -->
+        <!-- MARRIAGE CARD (Clean: No Event 03 / Main Event Label) -->
         <article class="reveal-item luxury-card rounded-[28px] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden ring-2 ring-amber-300/60">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1 rounded-full text-xs uppercase tracking-[0.2em] font-bold bg-gradient-to-r from-amber-200 to-amber-400 text-emerald-950">
-                Main Event • Muhurtham
-              </span>
-              <div class="w-11 h-11 rounded-full border border-amber-300/60 flex items-center justify-center bg-amber-400/20 text-amber-300">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-unified-heading font-bold gold-foil-text">
+                Marriage
+              </h3>
+              <div class="w-12 h-12 rounded-full border border-amber-300/60 flex items-center justify-center bg-amber-400/20 text-amber-300 shrink-0">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M12 3L14.5 8.5L20.5 9.5L16 14L17 20L12 17L7 20L8 14L3.5 9.5L9.5 8.5L12 3Z"/>
                 </svg>
               </div>
             </div>
 
-            <h3 class="font-royal text-2xl sm:text-3xl font-bold gold-foil-text mb-2">
-              Marriage
-            </h3>
-
-            <div class="mt-5 space-y-4 pt-5 border-t border-amber-400/20">
+            <div class="mt-4 space-y-4 pt-5 border-t border-amber-400/20">
               <div class="flex items-start gap-3.5">
                 <svg class="w-5 h-5 text-amber-300 shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -935,10 +1347,10 @@
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-primary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-primary);">
                     Nov 22, 2026
                   </p>
-                  <p class="text-xs uppercase tracking-wider opacity-80">Sunday Morning</p>
+                  <p class="text-unified-base opacity-80">Sunday Morning</p>
                 </div>
               </div>
 
@@ -948,7 +1360,7 @@
                   <path d="M12 7v5l3 3"/>
                 </svg>
                 <div>
-                  <p class="font-serif-luxury text-xl sm:text-2xl font-semibold" style="color: var(--text-secondary);">
+                  <p class="text-unified-base font-semibold" style="color: var(--text-secondary);">
                     Between 6:00 AM to 7:30 AM
                   </p>
                 </div>
@@ -965,13 +1377,13 @@
          ======================================================================== -->
     <section id="venue" class="reveal-item luxury-card rounded-[36px] p-6 sm:p-12 mb-12 relative overflow-hidden">
       <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="text-xs uppercase tracking-[0.35em] font-semibold" style="color: var(--text-muted);">
+        <span class="text-unified-base font-semibold" style="color: var(--text-muted);">
           Wedding Venue &amp; Directions
         </span>
-        <h2 class="font-royal text-2xl sm:text-4xl font-bold gold-foil-text mt-2 leading-snug">
+        <h2 class="text-unified-heading font-bold gold-foil-text mt-2 leading-snug">
           Thiruvottiyur Nadar Uravinmurai Thirumana Maligai
         </h2>
-        <p class="font-serif-luxury text-xl sm:text-2xl mt-3 font-medium" style="color: var(--text-secondary);">
+        <p class="text-unified-base mt-3 font-medium" style="color: var(--text-secondary);">
           No. 31, South Mada Street, Thiruvottiyur, Chennai – 600019
         </p>
 
@@ -981,9 +1393,9 @@
             href="https://www.google.com/maps/search/?api=1&query=Thiruvottiyur+Nadar+Uravinmurai+Thirumana+Maligai+No+31+South+Mada+Street+Thiruvottiyur+Chennai+600019"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-royal-gold px-6 py-3.5 rounded-full text-xs sm:text-sm uppercase tracking-[0.16em] inline-flex items-center gap-2.5"
+            class="btn-royal-gold px-6 py-3.5 rounded-full text-unified-base inline-flex items-center gap-2.5"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
@@ -993,9 +1405,9 @@
           <button
             type="button"
             onclick="copyVenueAddress()"
-            class="btn-royal-outline px-6 py-3.5 rounded-full text-xs sm:text-sm uppercase tracking-[0.16em] inline-flex items-center gap-2 cursor-pointer"
+            class="btn-royal-outline px-6 py-3.5 rounded-full text-unified-base inline-flex items-center gap-2 cursor-pointer"
           >
-            <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <rect x="9" y="9" width="13" height="13" rx="2"/>
               <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
             </svg>
@@ -1018,8 +1430,8 @@
             </svg>
           </div>
           <div>
-            <span class="text-xs uppercase tracking-[0.24em] block opacity-75">Nearest Bus Stop</span>
-            <h3 class="font-royal text-xl sm:text-2xl font-bold gold-foil-text mt-1">
+            <span class="text-unified-base block opacity-75">Nearest Bus Stop</span>
+            <h3 class="text-unified-heading font-bold gold-foil-text mt-1">
               Ellaiamman Kovil
             </h3>
           </div>
@@ -1037,8 +1449,8 @@
             </svg>
           </div>
           <div>
-            <span class="text-xs uppercase tracking-[0.24em] block opacity-75">Nearest Metro Station</span>
-            <h3 class="font-royal text-xl sm:text-2xl font-bold gold-foil-text mt-1">
+            <span class="text-unified-base block opacity-75">Nearest Metro Station</span>
+            <h3 class="text-unified-heading font-bold gold-foil-text mt-1">
               Thiruvottiyur Theradi Metro
             </h3>
           </div>
@@ -1059,13 +1471,13 @@
         </svg>
         <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-amber-400/60"></div>
       </div>
-      <p class="font-royal text-2xl sm:text-3xl gold-foil-text font-bold tracking-wide">
+      <p class="text-unified-heading gold-foil-text font-bold tracking-wide">
         C Ishwarya &amp; R L Rajkumar
       </p>
-      <p class="font-serif-luxury italic text-lg sm:text-xl mt-1" style="color: var(--text-secondary);">
+      <p class="italic text-unified-base mt-1" style="color: var(--text-secondary);">
         Awaiting the pleasure of your gracious presence and blessings
       </p>
-      <p class="text-xs uppercase tracking-[0.25em] mt-2 opacity-75">
+      <p class="text-unified-base mt-2 opacity-75">
         21 &amp; 22 November 2026 • Thiruvottiyur, Chennai – 600019
       </p>
     </footer>
@@ -1075,7 +1487,7 @@
   <!-- Custom Toast Notification Box -->
   <div
     id="toastNotification"
-    class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-amber-300 text-emerald-950 font-semibold text-xs sm:text-sm tracking-wider uppercase shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-[-16px]"
+    class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-amber-300 text-emerald-950 font-semibold text-unified-base shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-[-16px]"
     role="status"
     aria-live="polite"
   >
@@ -1083,17 +1495,175 @@
   </div>
 
   <!-- ==========================================================================
-       JAVASCRIPT LOGIC (Doors, Photo Frames, Countdown to 6:00 AM, Petals)
+       JAVASCRIPT LOGIC (Doors, Soothing Music, 3D Card Flipper, Photos, Petals)
        ========================================================================== -->
   <script>
     /* --------------------------------------------------------------------------
-       1. ROYAL DOORS OPENING & REPLAY LOGIC (Silent & Smooth)
+       1. SOOTHING SOUTH INDIAN INSTRUMENTAL BACKGROUND MELODY (Web Audio API)
+          Plays a peaceful Raga Mohanam / Hamsadhwani Veena & warm pad lullaby
+       -------------------------------------------------------------------------- */
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let melodyInterval = null;
+    let droneOsc1 = null;
+    let droneOsc2 = null;
+    let droneGain = null;
+    let noteStepIndex = 0;
+
+    // Gentle pentatonic Raga Mohanam / Hamsadhwani frequencies (in Hz, warm octave)
+    // Sa (C4), Ri2 (D4), Ga3 (E4), Pa (G4), Dha2 (A4), Sa (C5), Ga3 (E5)
+    const soothingMelodySequence = [
+      261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 329.63, 293.66,
+      261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 659.25, 523.25,
+      440.00, 392.00, 329.63, 293.66, 261.63, 329.63, 293.66, 261.63
+    ];
+
+    function initAudioEngine() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playPluckedVeenaNote(freq) {
+      if (!audioCtx || !isMusicPlaying) return;
+      const now = audioCtx.currentTime;
+
+      // Fundamental warm sine + gentle triangle harmonic for a soft plucked harp/veena timbre
+      const oscMain = audioCtx.createOscillator();
+      const oscHarm = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const noteGain = audioCtx.createGain();
+
+      oscMain.type = 'sine';
+      oscMain.frequency.setValueAtTime(freq, now);
+
+      oscHarm.type = 'triangle';
+      oscHarm.frequency.setValueAtTime(freq * 2, now);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1100, now);
+      filter.frequency.exponentialRampToValueAtTime(320, now + 2.1);
+
+      noteGain.gain.setValueAtTime(0.0001, now);
+      noteGain.gain.linearRampToValueAtTime(0.055, now + 0.08);
+      noteGain.gain.exponentialRampToValueAtTime(0.0008, now + 2.3);
+
+      const harmGain = audioCtx.createGain();
+      harmGain.gain.setValueAtTime(0.015, now);
+      harmGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+
+      oscMain.connect(filter);
+      oscHarm.connect(harmGain);
+      harmGain.connect(filter);
+      filter.connect(noteGain);
+      noteGain.connect(audioCtx.destination);
+
+      oscMain.start(now);
+      oscHarm.start(now);
+      oscMain.stop(now + 2.35);
+      oscHarm.stop(now + 2.35);
+    }
+
+    function startSoothingMusic() {
+      try {
+        initAudioEngine();
+        if (isMusicPlaying) return;
+        isMusicPlaying = true;
+
+        // Warm, whisper-quiet Tanpura Sa-Pa ambient pad drone (C3 + G3)
+        const now = audioCtx.currentTime;
+        droneGain = audioCtx.createGain();
+        droneGain.gain.setValueAtTime(0.0001, now);
+        droneGain.gain.linearRampToValueAtTime(0.022, now + 1.5);
+
+        droneOsc1 = audioCtx.createOscillator();
+        droneOsc2 = audioCtx.createOscillator();
+        droneOsc1.type = 'sine';
+        droneOsc2.type = 'sine';
+        droneOsc1.frequency.setValueAtTime(130.81, now); // Sa (C3)
+        droneOsc2.frequency.setValueAtTime(196.00, now); // Pa (G3)
+
+        droneOsc1.connect(droneGain);
+        droneOsc2.connect(droneGain);
+        droneGain.connect(audioCtx.destination);
+
+        droneOsc1.start(now);
+        droneOsc2.start(now);
+
+        // Play initial gentle note and start soothing tempo loop
+        playPluckedVeenaNote(soothingMelodySequence[noteStepIndex]);
+        noteStepIndex = (noteStepIndex + 1) % soothingMelodySequence.length;
+
+        melodyInterval = setInterval(() => {
+          if (!isMusicPlaying) return;
+          const freq = soothingMelodySequence[noteStepIndex];
+          playPluckedVeenaNote(freq);
+          noteStepIndex = (noteStepIndex + 1) % soothingMelodySequence.length;
+        }, 1450);
+
+        updateMusicUI();
+      } catch (e) {
+        // Fallback if browser blocks audio
+      }
+    }
+
+    function stopSoothingMusic() {
+      isMusicPlaying = false;
+      if (melodyInterval) {
+        clearInterval(melodyInterval);
+        melodyInterval = null;
+      }
+      if (droneGain && audioCtx) {
+        try {
+          droneGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+          setTimeout(() => {
+            try {
+              if (droneOsc1) { droneOsc1.stop(); droneOsc1.disconnect(); droneOsc1 = null; }
+              if (droneOsc2) { droneOsc2.stop(); droneOsc2.disconnect(); droneOsc2 = null; }
+            } catch (err) {}
+          }, 350);
+        } catch (err) {}
+      }
+      updateMusicUI();
+    }
+
+    function toggleSoothingMusic() {
+      if (isMusicPlaying) {
+        stopSoothingMusic();
+      } else {
+        startSoothingMusic();
+      }
+    }
+
+    function updateMusicUI() {
+      const iconPlaying = document.getElementById('musicIconPlaying');
+      const iconMuted = document.getElementById('musicIconMuted');
+      const statusText = document.getElementById('musicStatusText');
+
+      if (isMusicPlaying) {
+        iconPlaying.classList.remove('hidden');
+        iconMuted.classList.add('hidden');
+        statusText.textContent = 'Music: On';
+      } else {
+        iconPlaying.classList.add('hidden');
+        iconMuted.classList.remove('hidden');
+        statusText.textContent = 'Music: Off';
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       2. ROYAL DOORS OPENING & REPLAY LOGIC (Starts Soothing Song on Open)
        -------------------------------------------------------------------------- */
     const doorGateway = document.getElementById('doorGateway');
     const openInvitationBtn = document.getElementById('openInvitationBtn');
 
     openInvitationBtn.addEventListener('click', () => {
       doorGateway.classList.add('is-open');
+      startSoothingMusic();
       setTimeout(() => {
         doorGateway.style.visibility = 'hidden';
       }, 1850);
@@ -1107,7 +1677,7 @@
     }
 
     /* --------------------------------------------------------------------------
-       2. PHOTO FRAME VISIBILITY TOGGLE
+       3. PHOTO FRAME VISIBILITY TOGGLE & LOCALSTORAGE UPLOAD
        -------------------------------------------------------------------------- */
     let photosVisible = true;
     function togglePhotoFrames() {
@@ -1119,9 +1689,6 @@
       document.getElementById('togglePhotosLabel').textContent = photosVisible ? 'Photos: On' : 'Photos: Off';
     }
 
-    /* --------------------------------------------------------------------------
-       3. BROWSER PHOTO UPLOAD & LOCALSTORAGE PERSISTENCE
-       -------------------------------------------------------------------------- */
     function triggerPhotoUpload(inputId) {
       const input = document.getElementById(inputId);
       if (input) input.click();
@@ -1137,9 +1704,7 @@
         applyPhotoToSlot(previewImgId, placeholderId, dataUrl);
         try {
           localStorage.setItem(storageKey, dataUrl);
-        } catch (err) {
-          // Ignore quota errors if image is very large
-        }
+        } catch (err) {}
         showToast('Photograph added to frame');
       };
       reader.readAsDataURL(file);
@@ -1165,32 +1730,79 @@
 
         const savedCouple = localStorage.getItem('saved_couple_banner');
         if (savedCouple) applyPhotoToSlot('coupleBannerPreview', 'coupleBannerPlaceholder', savedCouple);
-      } catch (e) {
-        // Ignore storage errors
-      }
+      } catch (e) {}
     }
 
     /* --------------------------------------------------------------------------
-       4. LIVE COUNTDOWN TIMER TO NOV 22, 2026 AT 6:00 AM IST
+       4. 3D SPLIT-FLAP CARD FLIPPER COUNTDOWN TO NOV 22, 2026 AT 6:00 AM IST
        -------------------------------------------------------------------------- */
     const muhurthamTimestamp = new Date('2026-11-22T06:00:00+05:30').getTime();
+    const flipCardState = {};
 
+    function flipDigitCard(cardId, newDigit, animate = true) {
+      const card = document.getElementById(cardId) || document.querySelector(`.flip-card[data-key="${cardId}"]`);
+      if (!card) return;
+
+      const topSpan = card.querySelector('.top-half span');
+      const bottomSpan = card.querySelector('.bottom-half span');
+      const frontSpan = card.querySelector('.flap-front span');
+      const backSpan = card.querySelector('.flap-back span');
+
+      if (!topSpan || !bottomSpan || !frontSpan || !backSpan) return;
+
+      const nextVal = String(newDigit);
+      const prevVal = flipCardState[cardId];
+
+      if (prevVal === nextVal) return;
+
+      // Initial render or non-animated update
+      if (prevVal === undefined || !animate) {
+        flipCardState[cardId] = nextVal;
+        card.setAttribute('data-digit', nextVal);
+        topSpan.textContent = nextVal;
+        bottomSpan.textContent = nextVal;
+        frontSpan.textContent = nextVal;
+        backSpan.textContent = nextVal;
+        return;
+      }
+
+      flipCardState[cardId] = nextVal;
+      card.setAttribute('data-digit', nextVal);
+
+      // Set split-flap halves prior to starting 3D rotation
+      frontSpan.textContent = prevVal;
+      bottomSpan.textContent = prevVal;
+      topSpan.textContent = nextVal;
+      backSpan.textContent = nextVal;
+
+      card.classList.remove('is-flipping');
+      void card.offsetWidth; // Force reflow for consecutive 1-second flips
+      card.classList.add('is-flipping');
+
+      if (card._flipTimeout) {
+        clearTimeout(card._flipTimeout);
+      }
+
+      card._flipTimeout = setTimeout(() => {
+        if (bottomSpan && frontSpan) {
+          bottomSpan.textContent = nextVal;
+          frontSpan.textContent = nextVal;
+        }
+        card.classList.remove('is-flipping');
+      }, 530);
+    }
+
+    let isFirstCountdownTick = true;
     function updateCountdown() {
       const now = Date.now();
       const diff = muhurthamTimestamp - now;
-
-      const daysEl = document.getElementById('cd-days');
-      const hoursEl = document.getElementById('cd-hours');
-      const minsEl = document.getElementById('cd-minutes');
-      const secsEl = document.getElementById('cd-seconds');
       const statusEl = document.getElementById('countdownStatusMsg');
 
       if (diff <= 0) {
-        daysEl.textContent = '00';
-        hoursEl.textContent = '00';
-        minsEl.textContent = '00';
-        secsEl.textContent = '00';
-        statusEl.textContent = 'Shubh Muhurtham — November 22, 2026, 6:00 AM IST';
+        ['d1', 'd2', 'h1', 'h2', 'm1', 'm2', 's1', 's2'].forEach(k => flipDigitCard(k, '0', false));
+        if (statusEl) {
+          statusEl.textContent = 'Shubh Muhurtham — November 22, 2026, 6:00 AM IST';
+        }
         return;
       }
 
@@ -1199,10 +1811,25 @@
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      daysEl.textContent = String(days).padStart(2, '0');
-      hoursEl.textContent = String(hours).padStart(2, '0');
-      minsEl.textContent = String(minutes).padStart(2, '0');
-      secsEl.textContent = String(seconds).padStart(2, '0');
+      const dStr = String(days).padStart(2, '0');
+      const hStr = String(hours).padStart(2, '0');
+      const mStr = String(minutes).padStart(2, '0');
+      const sStr = String(seconds).padStart(2, '0');
+
+      const shouldAnimate = !isFirstCountdownTick;
+      const d1Val = dStr.length > 2 ? dStr.slice(0, dStr.length - 1) : dStr[0];
+      const d2Val = dStr[dStr.length - 1];
+
+      flipDigitCard('d1', d1Val, shouldAnimate);
+      flipDigitCard('d2', d2Val, shouldAnimate);
+      flipDigitCard('h1', hStr[0], shouldAnimate);
+      flipDigitCard('h2', hStr[1], shouldAnimate);
+      flipDigitCard('m1', mStr[0], shouldAnimate);
+      flipDigitCard('m2', mStr[1], shouldAnimate);
+      flipDigitCard('s1', sStr[0], shouldAnimate);
+      flipDigitCard('s2', sStr[1], shouldAnimate);
+
+      isFirstCountdownTick = false;
     }
 
     /* --------------------------------------------------------------------------
@@ -1314,7 +1941,11 @@
     /* --------------------------------------------------------------------------
        7. INTERSECTION OBSERVER SCROLL REVEAL & INITIALIZATION
        -------------------------------------------------------------------------- */
-    window.onload = function() {
+    let appInitialized = false;
+    function initWeddingApp() {
+      if (appInitialized) return;
+      appInitialized = true;
+
       restoreSavedPhotos();
       updateCountdown();
       setInterval(updateCountdown, 1000);
@@ -1336,7 +1967,10 @@
       }, { threshold: 0.12 });
 
       document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
-    };
+    }
+
+    document.addEventListener('DOMContentLoaded', initWeddingApp);
+    window.addEventListener('load', initWeddingApp);
   </script>
 </body>
 </html>
